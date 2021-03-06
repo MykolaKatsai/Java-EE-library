@@ -12,20 +12,20 @@
 </div>
 <br>
 <div class="form col-sm-6">
-    <form action="/book/add" method="post">
+    <form th:action="@{/book/add}" th:object="${book}" method="post">
         <div class="form-group">
-            <label for="title">Book name:</label>
-            <input type="text" id="title" class="form-control">
+            <label for="title">Book title:</label>
+            <input type="text" id="title" class="form-control" th:field="*{title}">
         </div>
 
         <div class="form-group">
             <label for="isbn">Book ISBN:</label>
-            <input type="text" id="isbn" class="form-control">
+            <input type="text" id="isbn" class="form-control" th:field="*{isbn}">
         </div>
 
         <div class="form-group">
             <label for="author">Book author:</label>
-            <input type="text" id="author" class="form-control">
+            <input type="text" id="author" class="form-control" th:field="*{author}">
         </div>
 
         <input type="submit" value="Add" class="btn btn-primary">
