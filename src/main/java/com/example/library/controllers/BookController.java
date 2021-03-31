@@ -1,6 +1,6 @@
-package com.example.demo.controllers;
+package com.example.library.controllers;
 
-import com.example.demo.entitys.Book;
+import com.example.library.entitys.Book;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
