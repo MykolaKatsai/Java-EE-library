@@ -4,8 +4,10 @@ import com.example.library.entitys.Book;
 import com.example.library.repositories.BookRepository;
 import com.example.library.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -18,6 +20,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book addBook(Book book) {
         return bookRepository.saveBook(book);
+    }
+
+    @Override
+    public Book findById(BigInteger isbn) {
+        return bookRepository.getBook(isbn);
     }
 
     @Override
@@ -39,6 +46,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Autowired
+    @Qualifier("BookRepositoryH2")
     private void setBookRepository(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }

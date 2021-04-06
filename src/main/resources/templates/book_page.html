@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row justify-content-center pt-3">
+        <div class="col-md-6">
+            <table class="table table-bordered table-light">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Attribute</th>
+                    <th scope="col">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>ISBN:</td>
+                    <td th:text="${book.isbn}"></td>
+                </tr>
+                <tr>
+                    <td>Title:</td>
+                    <td th:text="${book.title}"></td>
+                </tr>
+                <tr>
+                    <td>Author:</td>
+                    <td th:text="${book.author}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/" class="btn btn-warning">Return to all books</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

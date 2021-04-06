@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -20,7 +21,7 @@ public class BookRestController {
     @PostMapping("/book/add")
     public ResponseEntity<String> addBookRest(@RequestBody BookDTO bookDTO) {
 
-        Book book = new Book(bookDTO.getTitle(), bookDTO.getIsbn(), bookDTO.getAuthor());
+        Book book = new Book(bookDTO.getIsbn(), bookDTO.getTitle(), bookDTO.getAuthor());
         Book addedBook = bookService.addBook(book);
 
         if (addedBook == null) {
@@ -41,19 +42,20 @@ public class BookRestController {
     }
 
     @GetMapping("/book/search")
-    public List<Book> searchBook(@RequestParam("title") String title,
-                                 @RequestParam("isbn") String isbn,
-                                 @RequestParam("author") String author) {
+    public List<Book> searchBook(@RequestParam(name = "title", required = false) String title,
+                                 @RequestParam(name = "isbn", required = false) String isbnStr,
+                                 @RequestParam(name = "author", required = false) String author) {
 
         Predicate<Book> predicate = x -> true;
         if (!StringUtils.isEmpty(title)) {
-            predicate = predicate.and(b -> title.equals(b.getTitle()));
+            predicate = predicate.and(b -> b.getTitle().contains(title));
         }
-        if (!StringUtils.isEmpty(isbn)) {
-            predicate = predicate.and(b -> isbn.equals(b.getIsbn()));
+        if (!StringUtils.isEmpty(isbnStr)) {
+            BigInteger isbn = new BigInteger(isbnStr);
+            predicate = predicate.and(b -> b.getIsbn().equals(isbn));
         }
         if (!StringUtils.isEmpty(author)) {
-            predicate = predicate.and(b -> author.equals(b.getAuthor()));
+            predicate = predicate.and(b -> b.getAuthor().contains(author));
         }
 
         return bookService.searchBook(predicate);

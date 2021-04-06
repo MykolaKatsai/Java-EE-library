@@ -4,11 +4,12 @@ import com.example.library.entitys.Book;
 import com.example.library.repositories.BookRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository
+@Repository("BookRepositoryInMemory")
 public class BookRepositoryInMemoryImpl implements BookRepository {
 
     private static List<Book> booksDB = new ArrayList<>(); //imitated db
@@ -31,5 +32,11 @@ public class BookRepositoryInMemoryImpl implements BookRepository {
         return booksDB.stream()
                 .filter(x -> x.getTitle().contains(title))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Deprecated
+    public Book getBook(BigInteger isbn) {
+        return null;
     }
 }
