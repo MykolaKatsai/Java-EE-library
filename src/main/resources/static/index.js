@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    getAllBooks();
+
     $('#create-book-form').submit(function (e) {
         e.preventDefault();
 
@@ -9,8 +11,8 @@ $(document).ready(function () {
             url: '/rest/book/add',
             dataType: 'text',
             data: JSON.stringify({
-                title: $(this).find('[id=title]').val(),
                 isbn: $(this).find('[id=isbn]').val(),
+                title: $(this).find('[id=title]').val(),
                 author: $(this).find('[id=author]').val()
             }),
             beforeSend: function (xhr) {
@@ -78,7 +80,8 @@ $(document).ready(function () {
         $('#response-result').empty();
 
         books.forEach(function (book) {
-            $('#response-result').append('<tr><td>' + book.title + '</td><td>' + book.author + '</td>' + '<td>' + book.isbn + '</td></tr>');
+            let bookURL = '/book/' + book.isbn;
+            $('#response-result').append('<tr><td>' + book.isbn + '</td><td><a class="d-block text-dark" href="' + bookURL + '">' + book.title + '</a></td><td>' + book.author + '</td></tr>');
         });
     }
 });
