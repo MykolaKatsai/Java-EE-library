@@ -10,9 +10,9 @@ import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.util.List;
 
-@Repository("BookRepositoryH2")
+@Repository("BookRepositoryPersistence")
 @RequiredArgsConstructor
-public class BookRepositoryH2Impl implements BookRepository {
+public class BookRepositoryPersistenceImpl implements BookRepository {
 
     private final EntityManager entityManager;
 
